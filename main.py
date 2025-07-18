@@ -8,6 +8,9 @@ from flask import Flask, jsonify
 from threading import Thread
 
 app = Flask(__name__)
+@app.route('/')
+def home():
+    return "API is running ✅"
 
 @app.route('/trades')
 def get_trades():
