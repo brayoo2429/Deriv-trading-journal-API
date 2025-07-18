@@ -1,4 +1,6 @@
-
+@app.route('/')
+def home():
+    return 'API is running ✅'
 import asyncio
 import websockets
 import json
@@ -7,7 +9,7 @@ from threading import Thread
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/trades')
 def get_trades():
     return asyncio.run(fetch_trades())
 
