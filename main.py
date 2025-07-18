@@ -15,7 +15,7 @@ def get_trades():
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
     result = loop.run_until_complete(fetch_trades())
-    return jsonify(result)
+    return result
 
 async def fetch_trades():
     uri = "wss://ws.deriv.com/websockets/v3"
