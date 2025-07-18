@@ -18,7 +18,7 @@ async def fetch_trades():
     uri = "wss://ws.deriv.com/websockets/v3"
     async with websockets.connect(uri) as websocket:
         await websocket.send(json.dumps({
-            "authorize": "evmoePiCZblyYJL"  # Replace with your real Deriv token
+            "authorize": "DuIto1U1umKo0W3" # Replace with your real Deriv token
         }))
         await websocket.recv()  # Auth response
 
