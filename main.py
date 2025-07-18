@@ -28,7 +28,7 @@ async def fetch_trades():
         return jsonify(json.loads(response))
 
 def run_flask():
-    app.run(host='0.0.0.0', port=8000)
+    app.run(host='0.0.0.0', port=10000)
 
 if __name__ == '__main__':
     Thread(target=run_flask).start()
