@@ -1,6 +1,4 @@
-@app.route('/')
-def home():
-    return 'API is running ✅'
+
 import asyncio
 import websockets
 import json
