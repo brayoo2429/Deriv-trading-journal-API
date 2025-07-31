@@ -1,8 +1,12 @@
 import asyncio
 import websockets
 import json
+import requests
 from flask import Flask, jsonify
 from threading import Thread
+
+# Your Make.com webhook URL
+webhook_url = "https://hook.us2.make.com/ct0iist3vs538xomm027874bw92e3yfh"
 
 app = Flask(__name__)
 
@@ -11,23 +15,27 @@ def home():
     return "API is running ✅"
 
 @app.route('/trades')
-@app.route('/trades')
 def get_trades():
     try:
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         result = loop.run_until_complete(fetch_trades())
+
+        # Send the result to Make.com webhook
+        requests.post(webhook_url, json=result)
+
         return result
     except Exception as e:
         print(f"❌ Error occurred: {e}")
         return jsonify({"error": str(e)})
+
 async def fetch_trades():
     uri = "wss://ws.deriv.com/websockets/v3"
     async with websockets.connect(uri) as websocket:
         await websocket.send(json.dumps({
-            "authorize": "86YW4KgrodfDcL5"
+            "authorize": "86YW4KgrodfDcL5"  # Your Deriv token (demo)
         }))
-        await websocket.recv()  # Auth response
+        await websocket.recv()  # Authorization response
 
         await websocket.send(json.dumps({
             "statement": 1,
